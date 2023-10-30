@@ -1,0 +1,50 @@
+# Définition d'une useEffect sans clocher ou accumulateur
+
+useEffect(() => {
+    apiClient.get('?term=Burna+Boy').then(
+        (response) => {
+            console.log(response)
+        }
+    )
+});
+
+ce useEffect à chaque chargement du composant le contenant affichera toujours en console la reponse de l'api.
+
+# Définition d'une useEffect avec clocher ou accumulateur
+
+useEffect(() => {
+    apiClient.get('?term=Burna+Boy').then(
+        (response) => {
+            console.log(response)
+        }
+    )
+}, []);
+
+ce useEffect à chaque chargement du composant le contenant affichera une seule fois en console la reponse de l'api,
+Dans le clocher si on y met une variable c'est pour surveille sont état histoire d'afficher à chaque fois la réponse de L'api
+
+Supposons cet cas ou la valeur de value dans le useState change
+
+useEffect(() => {
+    apiClient.get('?term=Burna+Boy').then(
+        (response) => {
+            console.log(response)
+        }
+    )
+}, [value]);
+
+A chaque fois que la valeur s'incremente la reponse de l'api s'affiche n fois
+
+
+
+const [value, setValue] = useState(0)
+
+const Appuiement = () =>{
+    setValue(value + 1)
+}
+
+const [favoris, setFavoris] = useState([]);
+
+ici j'ai un useState qui stock des favoris
+
+setFavoris([...favoris, music]) lorsqu'on fait  ..favoris ça veut dire s'il y avait un autre favoris avant d'ajouter une autre music comme favoris
